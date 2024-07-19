@@ -1,0 +1,182 @@
+---
+
+---
+
+<canvas id="canvas-background" class="absolute top-0 left-0 w-full h-full"
+></canvas>
+
+<script lang="ts">
+  const getFocusArea = () => ({
+    x: {
+      min: canvas.width / 4 / pixelDensity,
+      max: (canvas.width - canvas.width / 4) / pixelDensity,
+    },
+    y: {
+      min: canvas.height / 4 / pixelDensity,
+      max: (canvas.height - canvas.height / 4) / pixelDensity,
+    },
+  });
+
+  // Main draw function
+  const drawLoop = (deltaTime) => {
+    let timeInterval = deltaTime - prevTime || 0;
+    currentTime += timeInterval;
+    prevTime = deltaTime;
+
+    const currentAutomatedHitInterval =
+      automatedHitsCompleted === 0
+        ? initialHitDelay + automatedHitInterval
+        : automatedHitInterval;
+
+    if (
+      currentTime > currentAutomatedHitInterval &&
+      automatedHitsCompleted < automatedHitCount
+    ) {
+      currentTime = 0;
+      const area = getFocusArea();
+      const randomX = Math.random() * (area.x.max - area.x.min) + area.x.min;
+      const randomY = Math.random() * (area.y.max - area.y.min) + area.y.min;
+      createExplosion(randomX, randomY);
+      automatedHitsCompleted += 1;
+    }
+
+    // draw background
+    context.fillStyle = backgroundColor;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    // draw/update particles
+    let indexesToRemove = [];
+    for (let i = particles.length - 1; i > 0; i--) {
+      if (particles[i].alive) {
+        particles[i].draw();
+        particles[i].update();
+      } else {
+        indexesToRemove.push(i);
+      }
+    }
+
+    // remove dead particles
+    if (indexesToRemove.length) {
+      for (let i = indexesToRemove.length; i > 0; i--) {
+        particles.splice(indexesToRemove[i], 1);
+      }
+    }
+
+    raf = requestAnimationFrame(drawLoop);
+  };
+
+  const handleCanvasClick = (event) => {
+    const rect = event.target.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    createExplosion(x, y);
+  };
+
+  const createExplosion = (x, y) => {
+    for (let i = 0; i < particleCount; i += 1) {
+      particles.push(new Particle(x, y, pixelDensity));
+    }
+  };
+
+  class Particle {
+    constructor(x, y, pixelDensity) {
+      this.x = x * pixelDensity;
+      this.y = y * pixelDensity;
+      this.pixelDensity = pixelDensity;
+      this.size = Math.floor(Math.random() * (maxSize - minSize) + minSize);
+      this.size *= pixelDensity;
+      this.velocity = Math.random() * (6 - 4) + 4;
+      this.velocity *= pixelDensity;
+      this.angle = Math.random() * 360;
+      this.fill = colours[Math.floor(Math.random() * colours.length)];
+      this.shape = Math.floor(Math.random() * 2) === 0 ? 'circle' : 'square';
+      this.rotation = Math.floor(Math.random() * 2) === 0 ? 45 : 0;
+      this.alive = true;
+      this.alpha = 1;
+      this.hSize = this.size / 2;
+    }
+
+    draw = () => {
+      context.save();
+      context.globalAlpha = this.alpha;
+      context.fillStyle = this.fill;
+      context.beginPath();
+
+      if (this.shape === 'circle') {
+        context.arc(
+          Math.floor(this.x),
+          Math.floor(this.y),
+          this.size,
+          0,
+          2 * Math.PI
+        );
+      } else if (this.shape === 'square') {
+        context.translate(
+          Math.floor(this.x) - this.size / 2,
+          Math.floor(this.y) - this.size / 2
+        );
+        context.rotate((this.rotation * Math.PI) / 180);
+        context.rect(0, 0, this.size, this.size);
+      }
+      context.lineWidth = 4 * pixelDensity;
+      context.fill();
+      context.restore();
+    };
+
+    update = () => {
+      this.x += Math.floor(
+        this.velocity * Math.cos((this.angle * Math.PI) / 180) * 3.5
+      );
+      this.y += Math.floor(
+        this.velocity * Math.sin((this.angle * Math.PI) / 180) * 3.5
+      );
+      this.size -= 0.75 * this.pixelDensity;
+      if (this.velocity <= 1) {
+        this.alpha -= 0.05;
+        if (this.alpha <= 0) {
+          this.alpha = 0;
+        }
+      }
+      this.angle += 1;
+      this.velocity -= 0.15 * this.pixelDensity;
+      if (this.size <= 0) {
+        this.size = 0;
+      }
+
+      if (this.size === 0 && this.alpha === 0) {
+        this.alive = false;
+      }
+    };
+  }
+
+  const setCanvasSize = () => {
+    canvas.height = canvas.clientHeight * pixelDensity;
+    canvas.width = canvas.clientWidth * pixelDensity;
+  };
+
+  // Setup
+  const canvas = document.getElementById('canvas-background');
+  const context = canvas.getContext('2d');
+  const pixelDensity = window.devicePixelRatio;
+  setCanvasSize();
+
+  let prevTime = 0;
+  let currentTime = 0;
+  let raf = null;
+  let automatedHitsCompleted = 0;
+  const particles = [];
+  const automatedHitInterval = 350;
+  const initialHitDelay = 500;
+  const automatedHitCount = 3;
+  const particleCount = 25;
+  const maxSize = 45;
+  const minSize = 15;
+  const backgroundColor = '#41E2BA';
+  const colours = ['#E86A92', '#F7E733', '#F7F7F9', '#2B2D42'];
+
+  // Start main draw loop
+  drawLoop();
+
+  canvas.addEventListener('click', handleCanvasClick);
+  window.addEventListener('resize', setCanvasSize);
+</script>
