@@ -6,7 +6,13 @@ import CanvasBackground from '../components/CanvasBackground.astro';
 import ArrowScrollDown from '../../public/arrow-scroll-down.svg?raw';
 import DisplayCard from '../components/DisplayCard.astro';
 
-const cards = await getCollection('cards');
+const about = await getEntry('cards', 'about');
+const work = await getCollection(
+  'cards',
+  ({ data }) => data.type === 'work'
+).then((response) =>
+  response.sort((a: any, b) => (a.data.sortOrder < b.data.sortOrder ? -1 : 1))
+);
 ---
 
 <Layout title="Alexander Mold's Portfolio">
@@ -24,25 +30,62 @@ const cards = await getCollection('cards');
       <p class="text-xl">Software Engineer</p>
     </div>
     <div class="scroll-down-container absolute bottom-6">
-      <button class="scroll-down w-12">
+      <button class="scroll-down w-12" onclick="handleScrollToMain()">
         <Fragment set:html={ArrowScrollDown} />
       </button>
     </div>
   </header>
-  <main class="w-full max-w-xl p-5 mx-auto">
-    <DisplayCard
-      title="About"
-      theme="red"
-      direction="left"
-      text="Hello there"
-    />
-    {
-      cards.map((card: any) => (
-        <DisplayCard title={card.data.title} text={card.data.text} />
-      ))
-    }
+  <main class="w-full max-w-xl p-5 mx-auto" id="main">
+    <div>
+      <DisplayCard
+        title={about.data.title}
+        text={about.data.text}
+        theme="yellow"
+      />
+    </div>
+    <div>
+      <h3 class="text-5xl font-bold">Work</h3>
+      {
+        work.map((card: any, index) => {
+          const theme = index % 2 === 0 ? 'red' : '';
+          const direction = index % 2 === 0 ? 'left' : 'right';
+          console.log(card.data.sortOrder);
+
+          return (
+            <DisplayCard
+              title={card.data.title}
+              text={card.data.text}
+              theme={theme}
+              direction={direction}
+            />
+          );
+        })
+      }
+    </div>
   </main>
 </Layout>
+
+<script lang="ts">
+  // Scroll down to main content on button click
+  const handleScrollToMain = () => {
+    const mainElement = document.getElementById('main');
+    mainElement.scrollIntoView({
+      behavior: 'smooth',
+    });
+  };
+
+  // Add animation class when each display card is visible
+  const cardElements = document.querySelectorAll('.display-card');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  });
+
+  cardElements.forEach((element) => observer.observe(element));
+</script>
 
 <style lang="scss">
   header {

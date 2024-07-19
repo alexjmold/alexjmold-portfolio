@@ -5,6 +5,8 @@ const cardContent = defineCollection({
   schema: z.object({
     title: z.string(),
     text: z.string(),
+    type: z.string(),
+    sortOrder: z.number(),
   }),
 });
 

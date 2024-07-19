@@ -8,7 +8,7 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
 >
   <div class="background-box"></div>
   <div class="relative">
-    <h3 class="text-5xl font-bold mb-5">{title}</h3>
+    <h3 class="text-3xl font-bold mb-5">{title}</h3>
     <p>{text}</p>
   </div>
   <div class="sparkles-container">
@@ -20,9 +20,46 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
 
 <style lang="scss">
   .display-card {
+    .background-box {
+      opacity: 0;
+    }
+
+    &.active {
+      .background-box {
+        animation: BoxRiseRight 1000ms cubic-bezier(0.215, 0.61, 0.355, 1)
+          forwards;
+      }
+
+      .sparkle {
+        animation: SparkleOne 1000ms cubic-bezier(0.215, 0.61, 0.355, 1) 1000ms
+          forwards;
+
+        &:nth-child(2) {
+          animation: SparkleTwo 1200ms cubic-bezier(0.215, 0.61, 0.355, 1)
+            1000ms forwards;
+        }
+        &:nth-child(3) {
+          animation: SparkleThree 1500ms cubic-bezier(0.215, 0.61, 0.355, 1)
+            1000ms forwards;
+        }
+      }
+
+      &.left {
+        .background-box {
+          left: auto;
+          right: 5%;
+        }
+
+        .sparkles-container {
+          right: auto;
+          left: 5%;
+        }
+      }
+    }
+
     &.yellow {
       .background-box {
-        border-color: #f7e733;
+        border-color: #fff586;
       }
     }
 
@@ -32,7 +69,7 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
       }
 
       .sparkle {
-        background-color: #f7e733;
+        background-color: #fff586;
       }
     }
   }
@@ -60,16 +97,14 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
       height: 10px;
       left: 10px;
       top: 20px;
-      background-color: #e86a92;
-      animation: SparkleOne 1000ms cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+      background-color: #41e2ba;
+      opacity: 0;
 
       &:nth-child(2) {
         width: 16px;
         height: 16px;
         left: 45px;
         top: 50px;
-        animation: SparkleTwo 1200ms cubic-bezier(0.215, 0.61, 0.355, 1)
-          forwards;
       }
 
       &:nth-child(3) {
@@ -78,8 +113,6 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
         left: auto;
         right: 10px;
         top: 30px;
-        animation: SparkleThree 1500ms cubic-bezier(0.215, 0.61, 0.355, 1)
-          forwards;
       }
     }
   }
@@ -114,6 +147,42 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
     to {
       opacity: 1;
       transform: translateY(0) rotate(-75deg);
+    }
+  }
+
+  @keyframes BoxRiseRight {
+    0% {
+      opacity: 0;
+      width: 0;
+      transform: translateY(50px);
+    }
+    50% {
+      opacity: 1;
+      width: 0;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 1;
+      width: 90%;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes BoxRiseLeft {
+    0% {
+      opacity: 0;
+      width: 0;
+      transform: translateY(50px);
+    }
+    50% {
+      opacity: 1;
+      width: 0;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 1;
+      width: 90%;
+      transform: translateY(0);
     }
   }
 </style>
