@@ -2,7 +2,10 @@
 const { title, text, direction, link, linkText, theme } = Astro.props;
 ---
 
-<div class="w-full py-10 relative" class:list={[theme, direction]}>
+<div
+  class="display-card w-full py-10 relative my-14"
+  class:list={[theme, direction]}
+>
   <div class="background-box"></div>
   <div class="relative">
     <h3 class="text-5xl font-bold mb-5">{title}</h3>
@@ -16,6 +19,24 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
 </div>
 
 <style lang="scss">
+  .display-card {
+    &.yellow {
+      .background-box {
+        border-color: #f7e733;
+      }
+    }
+
+    &.red {
+      .background-box {
+        border-color: #e86a92;
+      }
+
+      .sparkle {
+        background-color: #f7e733;
+      }
+    }
+  }
+
   .background-box {
     width: 90%;
     height: 100%;
@@ -39,7 +60,7 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
       height: 10px;
       left: 10px;
       top: 20px;
-      background-color: #41e2ba;
+      background-color: #e86a92;
       animation: SparkleOne 1000ms cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
 
       &:nth-child(2) {

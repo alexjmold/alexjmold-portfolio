@@ -1,9 +1,12 @@
 ---
+import { getCollection, getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import AnimatedTitle from '../components/AnimatedTitle.astro';
 import CanvasBackground from '../components/CanvasBackground.astro';
 import ArrowScrollDown from '../../public/arrow-scroll-down.svg?raw';
 import DisplayCard from '../components/DisplayCard.astro';
+
+const cards = await getCollection('cards');
 ---
 
 <Layout title="Alexander Mold's Portfolio">
@@ -29,10 +32,15 @@ import DisplayCard from '../components/DisplayCard.astro';
   <main class="w-full max-w-xl p-5 mx-auto">
     <DisplayCard
       title="About"
-      theme="yellow"
+      theme="red"
       direction="left"
       text="Hello there"
     />
+    {
+      cards.map((card: any) => (
+        <DisplayCard title={card.data.title} text={card.data.text} />
+      ))
+    }
   </main>
 </Layout>
 
