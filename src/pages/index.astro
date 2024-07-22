@@ -13,6 +13,13 @@ const work = await getCollection(
 ).then((response) =>
   response.sort((a: any, b) => (a.data.sortOrder < b.data.sortOrder ? -1 : 1))
 );
+
+const play = await getCollection(
+  'cards',
+  ({ data }) => data.type === 'play'
+).then((response) =>
+  response.sort((a: any, b) => (a.data.sortOrder < b.data.sortOrder ? -1 : 1))
+);
 ---
 
 <Layout title="Alexander Mold's Portfolio">
@@ -43,13 +50,30 @@ const work = await getCollection(
         theme="yellow"
       />
     </div>
-    <div>
+    <div class="mb-20">
       <h3 class="text-5xl font-bold">Work</h3>
       {
         work.map((card: any, index) => {
           const theme = index % 2 === 0 ? 'red' : '';
           const direction = index % 2 === 0 ? 'left' : 'right';
-          console.log(card.data.sortOrder);
+
+          return (
+            <DisplayCard
+              title={card.data.title}
+              text={card.data.text}
+              theme={theme}
+              direction={direction}
+            />
+          );
+        })
+      }
+    </div>
+    <div class="mb-20">
+      <h3 class="text-5xl font-bold">Play</h3>
+      {
+        play.map((card: any, index) => {
+          const theme = index % 2 === 0 ? 'red' : '';
+          const direction = index % 2 === 0 ? 'left' : 'right';
 
           return (
             <DisplayCard
