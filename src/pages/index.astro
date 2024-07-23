@@ -37,7 +37,7 @@ const play = await getCollection(
       <p class="text-xl">Software Engineer</p>
     </div>
     <div class="scroll-down-container absolute bottom-6">
-      <button class="scroll-down w-12" onclick="handleScrollToMain()">
+      <button class="scroll-down w-12" id="scroll-down">
         <Fragment set:html={ArrowScrollDown} />
       </button>
     </div>
@@ -89,14 +89,22 @@ const play = await getCollection(
   </main>
 </Layout>
 
-<script lang="ts">
+<script>
   // Scroll down to main content on button click
   const handleScrollToMain = () => {
     const mainElement = document.getElementById('main');
+    if (!mainElement) {
+      return;
+    }
     mainElement.scrollIntoView({
       behavior: 'smooth',
     });
   };
+
+  const scrollDownButton = document.getElementById(
+    'scroll-down'
+  ) as HTMLElement;
+  scrollDownButton.addEventListener('click', handleScrollToMain);
 
   // Add animation class when each display card is visible
   const cardElements = document.querySelectorAll('.display-card');

@@ -5,7 +5,7 @@
 <canvas id="canvas-background" class="absolute top-0 left-0 w-full h-full"
 ></canvas>
 
-<script lang="ts">
+<script>
   const getFocusArea = () => ({
     x: {
       min: canvas.width / 4 / pixelDensity,
@@ -18,7 +18,7 @@
   });
 
   // Main draw function
-  const drawLoop = (deltaTime) => {
+  const drawLoop = (deltaTime: number) => {
     let timeInterval = deltaTime - prevTime || 0;
     currentTime += timeInterval;
     prevTime = deltaTime;
@@ -65,21 +65,34 @@
     raf = requestAnimationFrame(drawLoop);
   };
 
-  const handleCanvasClick = (event) => {
-    const rect = event.target.getBoundingClientRect();
+  const handleCanvasClick = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    const rect = target.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
     createExplosion(x, y);
   };
 
-  const createExplosion = (x, y) => {
+  const createExplosion = (x: number, y: number) => {
     for (let i = 0; i < particleCount; i += 1) {
       particles.push(new Particle(x, y, pixelDensity));
     }
   };
 
   class Particle {
-    constructor(x, y, pixelDensity) {
+    x: number;
+    y: number;
+    pixelDensity: number;
+    size: number;
+    velocity: number;
+    angle: number;
+    fill: string;
+    shape: string;
+    rotation: number;
+    alive: boolean;
+    alpha: number;
+
+    constructor(x: number, y: number, pixelDensity: number) {
       this.x = x * pixelDensity;
       this.y = y * pixelDensity;
       this.pixelDensity = pixelDensity;
@@ -93,7 +106,6 @@
       this.rotation = Math.floor(Math.random() * 2) === 0 ? 45 : 0;
       this.alive = true;
       this.alpha = 1;
-      this.hSize = this.size / 2;
     }
 
     draw = () => {
@@ -155,8 +167,10 @@
   };
 
   // Setup
-  const canvas = document.getElementById('canvas-background');
-  const context = canvas.getContext('2d');
+  const canvas = document.getElementById(
+    'canvas-background'
+  ) as HTMLCanvasElement;
+  const context = canvas.getContext('2d') as CanvasRenderingContext2D;
   const pixelDensity = window.devicePixelRatio;
   setCanvasSize();
 
@@ -164,7 +178,7 @@
   let currentTime = 0;
   let raf = null;
   let automatedHitsCompleted = 0;
-  const particles = [];
+  const particles: Particle[] = [];
   const automatedHitInterval = 350;
   const initialHitDelay = 500;
   const automatedHitCount = 3;
@@ -175,7 +189,7 @@
   const colours = ['#E86A92', '#fff586', '#F7F7F9', '#2B2D42'];
 
   // Start main draw loop
-  drawLoop();
+  drawLoop(0);
 
   canvas.addEventListener('click', handleCanvasClick);
   window.addEventListener('resize', setCanvasSize);

@@ -8,13 +8,13 @@ const { text } = Astro.props;
   </h1>
 </div>
 
-<script lang="ts" type="module">
-  import anime from './node_modules/animejs/lib/anime.es.js';
+<script>
+  import anime from 'animejs/lib/anime.es.js';
 
   // Break each word into its own element
-  const titleWrapper = document.querySelector('h1.title');
+  const titleWrapper = document.querySelector('h1.title') as HTMLElement;
   titleWrapper.innerHTML = '';
-  const titleString = titleWrapper.dataset.text;
+  const titleString = titleWrapper.dataset.text as String;
   const words = titleString.split(' ');
 
   words.forEach((word) => {
@@ -50,7 +50,7 @@ const { text } = Astro.props;
       rotateZ: [20, 0],
       duration: 750,
       easing: 'easeOutExpo',
-      delay: (el, i) => 30 * i,
+      delay: (el: HTMLElement, i: number) => 30 * i,
     });
 </script>
 
