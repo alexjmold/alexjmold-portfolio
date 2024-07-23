@@ -45,7 +45,7 @@
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     // draw/update particles
-    let indexesToRemove = [];
+    let indexesToRemove: number[] = [];
     for (let i = particles.length - 1; i > 0; i--) {
       if (particles[i].alive) {
         particles[i].draw();
@@ -176,7 +176,7 @@
 
   let prevTime = 0;
   let currentTime = 0;
-  let raf = null;
+  let raf: any = null;
   let automatedHitsCompleted = 0;
   const particles: Particle[] = [];
   const automatedHitInterval = 350;
