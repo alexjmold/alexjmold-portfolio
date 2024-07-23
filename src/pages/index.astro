@@ -20,6 +20,8 @@ const play = await getCollection(
 ).then((response) =>
   response.sort((a: any, b) => (a.data.sortOrder < b.data.sortOrder ? -1 : 1))
 );
+
+const themes = ['green', 'red', 'yellow'];
 ---
 
 <Layout title="Alexander Mold's Portfolio">
@@ -53,14 +55,17 @@ const play = await getCollection(
     <div class="mb-20">
       <h3 class="text-5xl font-bold">Work</h3>
       {
-        work.map((card: any, index) => {
-          const theme = index % 2 === 0 ? 'red' : '';
+        work.map(({ data }: any, index) => {
+          const theme = themes[index % themes.length];
           const direction = index % 2 === 0 ? 'left' : 'right';
+          console.log(data.linkText);
 
           return (
             <DisplayCard
-              title={card.data.title}
-              text={card.data.text}
+              title={data.title}
+              text={data.text}
+              link={data.link}
+              linkText={data.linkText}
               theme={theme}
               direction={direction}
             />

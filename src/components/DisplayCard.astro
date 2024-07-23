@@ -10,6 +10,17 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
   <div class="relative">
     <h3 class="text-3xl font-bold mb-5">{title}</h3>
     <p>{text}</p>
+    {
+      link ? (
+        <div class="relative">
+          <a href={link} class="card-link inline-block relative px-5 py-3">
+            {linkText}
+          </a>
+        </div>
+      ) : (
+        ''
+      )
+    }
   </div>
   <div class="sparkles-container">
     <span class="sparkle"></span>
@@ -75,6 +86,10 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
     top: 0;
     left: 5%;
     border: 16px solid #41e2ba;
+  }
+
+  .card-link {
+    background-color: #41e2ba;
   }
 
   .sparkles-container {
@@ -150,7 +165,7 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
       transform: translateY(50px);
     }
     to {
-      opacity: 1;
+      opacity: 0.5;
       transform: translateY(0);
     }
   }
