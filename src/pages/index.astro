@@ -44,7 +44,7 @@ const themes = ['green', 'red', 'yellow'];
       </button>
     </div>
   </header>
-  <main class="w-full max-w-xl p-5 mx-auto" id="main">
+  <main class="w-full max-w-2xl p-5 mx-auto" id="main">
     <div>
       <DisplayCard
         title={about.data.title}
@@ -56,7 +56,6 @@ const themes = ['green', 'red', 'yellow'];
       <h3 class="text-5xl font-bold">Work</h3>
       {
         work.map(({ data }: any, index) => {
-          const theme = themes[index % themes.length];
           const direction = index % 2 === 0 ? 'left' : 'right';
           console.log(data.linkText);
 
@@ -66,7 +65,8 @@ const themes = ['green', 'red', 'yellow'];
               text={data.text}
               link={data.link}
               linkText={data.linkText}
-              theme={theme}
+              image={data.image}
+              imageType={data.imageType}
               direction={direction}
             />
           );
@@ -76,15 +76,17 @@ const themes = ['green', 'red', 'yellow'];
     <div class="mb-20">
       <h3 class="text-5xl font-bold">Play</h3>
       {
-        play.map((card: any, index) => {
-          const theme = index % 2 === 0 ? 'red' : '';
+        play.map(({ data }: any, index) => {
           const direction = index % 2 === 0 ? 'left' : 'right';
 
           return (
             <DisplayCard
-              title={card.data.title}
-              text={card.data.text}
-              theme={theme}
+              title={data.title}
+              text={data.text}
+              link={data.link}
+              linkText={data.linkText}
+              image={data.image}
+              imageType={data.imageType}
               direction={direction}
             />
           );

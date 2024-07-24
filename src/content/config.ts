@@ -9,6 +9,8 @@ const cardContent = defineCollection({
     sortOrder: z.number(),
     link: z.string().optional(),
     linkText: z.string().optional(),
+    image: z.string().optional(),
+    imageType: z.string().optional(),
   }),
 });
 

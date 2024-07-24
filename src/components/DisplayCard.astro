@@ -1,5 +1,6 @@
 ---
-const { title, text, direction, link, linkText, theme } = Astro.props;
+const { title, text, direction, link, linkText, theme, image, imageType } =
+  Astro.props;
 ---
 
 <div
@@ -7,21 +8,39 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
   class:list={[theme, direction]}
 >
   <div class="background-box"></div>
-  <div class="relative">
-    <h3 class="text-3xl font-bold mb-5">{title}</h3>
-    <p>{text}</p>
+  <div
+    class="relative sm:flex sm:gap-5"
+    class:list={[direction === 'right' ? 'flex-row-reverse' : '']}
+  >
+    <div class="w-full">
+      <h3 class="text-3xl font-bold mb-5">{title}</h3>
+      <p>{text}</p>
+      {
+        link && (
+          <div class="relative mt-5">
+            <a href={link} class="card-link inline-block relative px-5 py-3">
+              <span class="relative z-10 font-bold">{linkText}</span>
+            </a>
+          </div>
+        )
+      }
+    </div>
     {
-      link ? (
-        <div class="relative mt-5">
-          <a
-            href={link}
-            class="card-link border border-4 border-black inline-block relative px-5 py-3"
-          >
-            <span class="relative z-10 font-bold">{linkText}</span>
-          </a>
+      image && (
+        <div class="w-full sm:w-80">
+          <div class="image-container w-full overflow-hidden">
+            <div class="w-full sm:w-80 h-60 mt-10 sm:mt-0 bg-black">
+              <img
+                class="card-image w-full h-full"
+                class:list={[
+                  imageType === 'contain' ? 'object-contain' : 'object-cover',
+                ]}
+                src={image}
+                alt=""
+              />
+            </div>
+          </div>
         </div>
-      ) : (
-        ''
       )
     }
   </div>
@@ -34,13 +53,37 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
 
 <style lang="scss">
   .display-card {
+    h3,
+    p {
+      opacity: 0;
+    }
+
     .background-box {
       opacity: 0;
+    }
+
+    .image-container {
+      width: 0;
+      transition: 500ms width cubic-bezier(0.215, 0.61, 0.355, 1);
     }
 
     &.active {
       .background-box {
         animation: BoxRise 1000ms cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+      }
+
+      h3,
+      p {
+        animation: TextRise 500ms cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+        animation-delay: 250ms;
+      }
+
+      p {
+        animation-delay: 500ms;
+      }
+
+      .image-container {
+        width: 100%;
       }
 
       .sparkle {
@@ -71,17 +114,7 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
       }
     }
 
-    &.yellow {
-      .background-box {
-        border-color: #fff586;
-      }
-    }
-
     &.red {
-      .background-box {
-        border-color: #e86a92;
-      }
-
       .sparkle {
         background-color: #fff586;
       }
@@ -94,7 +127,7 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
     position: absolute;
     top: 0;
     left: 5%;
-    border: 16px solid #41e2ba;
+    border: 16px solid #f7f7f9;
   }
 
   .card-link {
@@ -197,8 +230,19 @@ const { title, text, direction, link, linkText, theme } = Astro.props;
       transform: translateY(50px);
     }
     to {
-      opacity: 0.5;
+      opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @keyframes TextRise {
+    from {
+      opacity: 0;
+      transform: translateY(50px) skew(20deg);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) skew(0);
     }
   }
 </style>
