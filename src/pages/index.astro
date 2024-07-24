@@ -3,7 +3,6 @@ import { getCollection, getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import AnimatedTitle from '../components/AnimatedTitle.astro';
 import CanvasBackground from '../components/CanvasBackground.astro';
-import ArrowScrollDown from '../../public/arrow-scroll-down.svg?raw';
 import DisplayCard from '../components/DisplayCard.astro';
 
 const about = await getEntry('cards', 'about');
@@ -38,26 +37,22 @@ const themes = ['green', 'red', 'yellow'];
       <AnimatedTitle text="Alexander Mold" />
       <p class="text-xl">Software Engineer</p>
     </div>
-    <div class="scroll-down-container absolute bottom-6">
-      <button class="scroll-down w-12" id="scroll-down">
-        <Fragment set:html={ArrowScrollDown} />
-      </button>
-    </div>
   </header>
   <main class="w-full max-w-2xl p-5 mx-auto" id="main">
     <div>
       <DisplayCard
         title={about.data.title}
         text={about.data.text}
+        backgroundBoxColor="#fff586"
         theme="yellow"
       />
     </div>
     <div class="mb-20">
-      <h3 class="text-5xl font-bold">Work</h3>
+      <h3 class="site-title text-5xl font-bold">Work</h3>
       {
         work.map(({ data }: any, index) => {
           const direction = index % 2 === 0 ? 'left' : 'right';
-          console.log(data.linkText);
+          const theme = themes[index % themes.length];
 
           return (
             <DisplayCard
@@ -68,16 +63,18 @@ const themes = ['green', 'red', 'yellow'];
               image={data.image}
               imageType={data.imageType}
               direction={direction}
+              theme={theme}
             />
           );
         })
       }
     </div>
     <div class="mb-20">
-      <h3 class="text-5xl font-bold">Play</h3>
+      <h3 class="site-title yellow text-5xl font-bold">Play</h3>
       {
         play.map(({ data }: any, index) => {
           const direction = index % 2 === 0 ? 'left' : 'right';
+          const theme = themes[index % themes.length];
 
           return (
             <DisplayCard
@@ -88,6 +85,7 @@ const themes = ['green', 'red', 'yellow'];
               image={data.image}
               imageType={data.imageType}
               direction={direction}
+              theme={theme}
             />
           );
         })
@@ -145,16 +143,6 @@ const themes = ['green', 'red', 'yellow'];
     }
   }
 
-  .scroll-down-container {
-    opacity: 0;
-    animation: OpacityIn 2500ms cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
-    animation-delay: 2500ms;
-  }
-
-  .scroll-down {
-    animation: ScrollDown 2500ms cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-  }
-
   @keyframes RiseUp {
     from {
       opacity: 0;
@@ -175,30 +163,33 @@ const themes = ['green', 'red', 'yellow'];
     }
   }
 
-  @keyframes ScrollDown {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px);
+  .site-title {
+    position: relative;
+    display: inline-block;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background-color: #41e2ba;
+      transform: rotate(2deg);
+      z-index: -1;
+      border-radius: 1em;
     }
-    10% {
-      opacity: 0;
-      transform: translateY(-20px);
+
+    &.red {
+      &::before {
+        background-color: #e86a92;
+      }
     }
-    30% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    70% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    90% {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(20px);
+
+    &.yellow {
+      &::before {
+        background-color: #fff586;
+      }
     }
   }
 </style>
