@@ -5,6 +5,7 @@ import '@fontsource/kalam';
 import SiteFooter from '../components/SiteFooter.astro';
 import AnimatedTitle from '../components/AnimatedTitle.astro';
 import ArrowLeft from '../../public/img/icons/arrow-left.svg?raw';
+import ExternalLink from '../../public/img/icons/external-link.svg?raw';
 import '../styles/global.scss';
 
 const { frontmatter } = Astro.props;
@@ -44,6 +45,21 @@ const { frontmatter } = Astro.props;
       </div>
       <div class="w-full max-w-xl mx-auto my-10 text-lg">
         <slot />
+        {
+          frontmatter.link && (
+            <a
+              href={frontmatter.link}
+              target="_blank"
+              rel="noopener"
+              class="site-link px-5 py-3 inline-flex font-bold items-center jusity-center gap-2 rounded-xl"
+            >
+              <span class="relative font-bold">{frontmatter.linkText}</span>
+              <span class="w-5 inline-block relative back-link-arrow overflow-hidden">
+                <Fragment set:html={ExternalLink} />
+              </span>
+            </a>
+          )
+        }
       </div>
     </div>
     <SiteFooter />
