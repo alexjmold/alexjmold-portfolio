@@ -5,5 +5,5 @@ type: 'work'
 sortOrder: 2
 link: '/portfolio/digital-agency-website'
 linkText: Learn more
-image: '/img/creative-agency-logo.jpg'
+image: '/img/cards/creative-agency-logo.jpg'
 ---

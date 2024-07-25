@@ -5,5 +5,5 @@ type: 'work'
 sortOrder: 4
 link: '/portfolio/credit-score-map'
 linkText: 'Learn more'
-image: '/img/credit-score-mockup.jpg'
+image: '/img/cards/credit-score-mockup.jpg'
 ---

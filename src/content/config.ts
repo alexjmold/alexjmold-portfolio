@@ -14,15 +14,6 @@ const cardContent = defineCollection({
   }),
 });
 
-const portfolioContent = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    text: z.string(),
-  }),
-});
-
 export const collections = {
-  portfolio: portfolioContent,
   cards: cardContent,
 };

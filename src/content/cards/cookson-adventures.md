@@ -5,5 +5,5 @@ type: 'work'
 sortOrder: 6
 link: '/portfolio/adventures-website'
 linkText: 'Learn more'
-image: '/img/helicopter-thumbnail.jpg'
+image: '/img/cards/helicopter-thumbnail.jpg'
 ---

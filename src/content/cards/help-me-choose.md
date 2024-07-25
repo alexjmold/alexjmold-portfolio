@@ -5,6 +5,6 @@ type: 'work'
 sortOrder: 3
 link: '/portfolio/saas-business'
 linkText: 'Learn more'
-image: '/img/hmc-card.png'
+image: '/img/cards/hmc-card.png'
 imageType: 'contain'
 ---

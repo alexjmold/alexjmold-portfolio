@@ -5,5 +5,5 @@ type: 'play'
 sortOrder: 1
 link: '/portfolio/hades-boon-menu'
 linkText: 'Have a play'
-image: '/img/hades-boon-menu.jpg'
+image: '/img/cards/hades-boon-menu.jpg'
 ---

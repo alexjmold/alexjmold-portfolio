@@ -5,5 +5,5 @@ type: 'play'
 sortOrder: 0
 link: '/portfolio/css-looping-animation'
 linkText: 'Have a play'
-image: '/img/fun-animation.gif'
+image: '/img/cards/fun-animation.gif'
 ---

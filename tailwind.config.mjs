@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Work Sans', 'sans-serif'],
+        sans: ['Outfit Variable', 'sans-serif'],
         handwriting: ['Kalam', 'sans-serif'],
       },
     },

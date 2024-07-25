@@ -5,5 +5,5 @@ type: 'work'
 sortOrder: 7
 link: '/portfolio/interior-savers-guide'
 linkText: 'Learn more'
-image: '/img/ui-slide.gif'
+image: '/img/cards/ui-slide.gif'
 ---

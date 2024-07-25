@@ -1,10 +1,11 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
-import '@fontsource-variable/work-sans';
+import '@fontsource-variable/outfit';
 import '@fontsource/kalam';
 import SiteFooter from '../components/SiteFooter.astro';
 import AnimatedTitle from '../components/AnimatedTitle.astro';
-import ArrowLeft from '../../public/arrow-left.svg?raw';
+import ArrowLeft from '../../public/img/icons/arrow-left.svg?raw';
+import '../styles/global.scss';
 
 const { frontmatter } = Astro.props;
 ---
@@ -21,20 +22,27 @@ const { frontmatter } = Astro.props;
     <!-- <ViewTransitions /> -->
   </head>
   <body>
-    <div class="site-container shadow-2xl">
-      <div class="w-full max-w-xl mx-auto p-5">
+    <div class="px-5">
+      <div class="w-full max-w-xl mx-auto pt-5">
         <a
           href="/"
-          class="back-link px-5 py-3 inline-flex font-bold items-center jusity-center gap-2 rounded-xl"
+          class="site-link px-5 py-3 inline-flex font-bold items-center jusity-center gap-2 rounded-xl"
         >
-          <span class="w-5 inline-block back-link-arrow overflow-hidden">
+          <span
+            class="w-5 inline-block relative back-link-arrow overflow-hidden"
+          >
             <Fragment set:html={ArrowLeft} />
           </span>
-          <span class="inline-block">Back</span>
+          <span class="inline-block relative">Back</span>
         </a>
         <div class="mt-10">
           <AnimatedTitle text={frontmatter.title} />
         </div>
+      </div>
+      <div class="w-full max-w-4xl mx-auto mt-5 mb-10">
+        <img src={frontmatter.headerImage} class="rounded-2xl" />
+      </div>
+      <div class="w-full max-w-xl mx-auto my-10 text-lg">
         <slot />
       </div>
     </div>
@@ -42,48 +50,7 @@ const { frontmatter } = Astro.props;
   </body>
 </html>
 <style is:global lang="scss">
-  body {
-    background-color: #2b2d42;
-  }
-
-  .site-container {
-    margin-bottom: 500px;
-    background-color: #fff;
-    z-index: 1;
-    position: relative;
-  }
-
-  h1,
-  h2,
-  h3,
   p {
     margin-bottom: 1em;
-  }
-
-  .back-link {
-    background-color: #41e2ba;
-
-    &:hover {
-      .back-link-arrow {
-        svg {
-          animation: ArrowWrapAround 350ms cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
-      }
-    }
-  }
-
-  @keyframes ArrowWrapAround {
-    0% {
-      transform: translateX(0);
-    }
-    49% {
-      transform: translateX(-100%);
-    }
-    50% {
-      transform: translateX(100%);
-    }
-    100% {
-      transform: translateX(0);
-    }
   }
 </style>
