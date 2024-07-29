@@ -6,4 +6,5 @@ sortOrder: 5
 link: '/portfolio/bet-calculator'
 linkText: 'Find out more'
 image: '/img/cards/bet-victor-thumbnail.jpg'
+key: bet-calculator
 ---

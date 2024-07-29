@@ -4,6 +4,7 @@ title: 'Digital Agency Website'
 headerImage: '/img/portfolio/digital-agency-header.jpg'
 link: 'https://wearekitty.com/'
 linkText: 'Take a look'
+key: 'digital-agency-website'
 ---
 
 A WordPress site that utilises smooth page transitions and animations throughout to provide a memorable user experience.

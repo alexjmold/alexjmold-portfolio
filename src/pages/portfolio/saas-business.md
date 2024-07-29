@@ -4,6 +4,7 @@ title: 'SaaS Platform'
 headerImage: '/img/portfolio/help-me-choose-example.jpg'
 link: 'https://helpmechoose.ai/'
 linkText: 'Check it out'
+key: 'saas-business'
 ---
 
 This software as a service tool was made for use on ecommerce websites where users were routinely faced with daunting screens of masses of products with little differentiation, or in places where it was hard for the customer themselves to know which product would be a good fit for them.
@@ -18,7 +19,7 @@ Secondly, the software needed to be able to take in a product feed of any struct
 
 Lastly, the platform needed to be able to be integrated with any website, including SPAs, traditional web servers or mobile apps.
 
-In order to achieve this, I build a custom internal dashboard tool that gave the customer service team direct access to create question flows that included conditional questions and answers, as well as the ability to create weightings and strategies in order to show sensible or requested products by the client.
+In order to achieve this, I built a custom internal dashboard tool that gave the customer service team direct access to create question flows that included conditional questions and answers, as well as the ability to create weightings and strategies in order to show sensible or requested products by the client.
 
 This then extended to allow for the internal team to be able to add where they'd like to deploy the tool, as well controlling how every aspect of the tool looked on a particular client's site so it would blend in seamlessly with their existing branding.
 
@@ -26,7 +27,7 @@ As all of the configuration was done on our side, the client then simply needed 
 
 ![Saas Platform mobile mock up](/img/portfolio/hmc-phone-mockup.jpg)
 
-I rewrote the entire weighting engine in order to work with all of the new structures I had put in place, and to simplify things as much as possible for extending to new systems. Which is exactly what happened a year or so later.
+I rewrote the entire weighting engine in order to work with all of the new structures I had put in place, and to simplify things as much as possible for extending to new systems. Which is exactly what happened a year later.
 
 After the main internal app was released and battle tested, we decided to move on to creating a Shopify App to target that corner of the web. This is so that customers could get the same experience as our team in creating their own customer journeys, all from within their Shopify store. I oversaw the architecture and engineering for this.
 

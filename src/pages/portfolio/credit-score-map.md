@@ -4,6 +4,7 @@ title: 'Credit Score Map'
 headerImage: '/img/portfolio/credit-score-mockup.jpg'
 link: 'https://www.experian.co.uk/consumer/credit-score-map-uk/'
 linkText: 'Take a look'
+key: 'credit-score-map'
 ---
 
 An interactive credit score map of the UK built with Vue.js and Google Maps.

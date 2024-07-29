@@ -1,8 +1,8 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
 import '@fontsource-variable/outfit';
 import '@fontsource/kalam';
 import SiteFooter from '../components/SiteFooter.astro';
+import PortfolioSuggestion from '../components/PortfolioSuggestion.astro';
 import AnimatedTitle from '../components/AnimatedTitle.astro';
 import ArrowLeft from '../../public/img/icons/arrow-left.svg?raw';
 import ExternalLink from '../../public/img/icons/external-link.svg?raw';
@@ -20,7 +20,10 @@ const { frontmatter } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{frontmatter.title}</title>
-    <!-- <ViewTransitions /> -->
+    <meta
+      property="og:image"
+      content=`${Astro.url.pathname}/img/alexjmold-social.jpg`
+    />
   </head>
   <body>
     <div class="px-5">
@@ -61,6 +64,7 @@ const { frontmatter } = Astro.props;
           )
         }
       </div>
+      <PortfolioSuggestion key={frontmatter.key} />
     </div>
     <SiteFooter />
   </body>

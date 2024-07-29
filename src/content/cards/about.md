@@ -5,4 +5,5 @@ type: 'about'
 link: '#'
 linkText: 'See my CV'
 sortOrder: 1
+key: 'about'
 ---

@@ -6,4 +6,5 @@ sortOrder: 4
 link: '/portfolio/credit-score-map'
 linkText: 'Learn more'
 image: '/img/cards/credit-score-mockup.jpg'
+key: credit-score-map
 ---

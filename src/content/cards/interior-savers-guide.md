@@ -6,4 +6,5 @@ sortOrder: 7
 link: '/portfolio/interior-savers-guide'
 linkText: 'Learn more'
 image: '/img/cards/ui-slide.gif'
+key: 'interior-savers-guide'
 ---

@@ -4,6 +4,7 @@ title: 'Bet Calculator'
 headerImage: '/img/portfolio/bet-calculator-mockup.jpg'
 link: 'https://www.betvictor.com/en-gb/bet-calculator'
 linkText: 'Take a look'
+key: 'bet-calculator'
 ---
 
 An online betting calculator using Vue.js, a Webpack build system and pre-render plugin to be SEO friendly, this became the second most traffic intensive page on the client's site.
