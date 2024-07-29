@@ -1,6 +1,6 @@
 ---
 title: 'BetVictor Betting Calculator'
-text: 'Place your bets!'
+text: 'Intuitive SPA for with great SEO that drives high amounts of traffic to the site'
 type: 'work'
 sortOrder: 5
 link: '/portfolio/bet-calculator'

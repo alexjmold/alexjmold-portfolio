@@ -1,6 +1,6 @@
 ---
 title: 'Hades Boon Menu'
-text: 'Replicating one of my favourite game UIs'
+text: "Replicating one of my favourite game's UIs"
 type: 'play'
 sortOrder: 1
 link: '/portfolio/hades-boon-menu'

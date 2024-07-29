@@ -1,6 +1,6 @@
 ---
 title: 'Mood Swing Animation'
-text: 'Pushing the limits of CSS'
+text: 'Highly polished looping CSS animation'
 type: 'play'
 sortOrder: 0
 link: '/portfolio/css-looping-animation'

@@ -1,6 +1,6 @@
 ---
 title: 'Interior Savers Guide'
-text: 'A very cool UI'
+text: 'Highly animated and interactive furniture shopping service'
 type: 'work'
 sortOrder: 7
 link: '/portfolio/interior-savers-guide'

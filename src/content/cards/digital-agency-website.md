@@ -1,8 +1,8 @@
 ---
 title: 'Digital Agency Website'
-text: 'A cool digital agency! A cool digital agency! A cool digital agency! A cool digital agency! A cool digital agency! A cool digital agency!'
+text: 'Fresh website for a digital agency that mirrors its modern and creative outlook'
 type: 'work'
-sortOrder: 2
+sortOrder: 3
 link: '/portfolio/digital-agency-website'
 linkText: Learn more
 image: '/img/cards/creative-agency-logo.jpg'

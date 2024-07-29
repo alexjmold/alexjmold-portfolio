@@ -30,7 +30,7 @@ const boxBorderColor = backgroundBoxColor || '#f7f7f9';
       <p>{text}</p>
       {
         link && (
-          <div class="relative mt-5">
+          <div class="relative mt-5 site-link-container">
             <a href={link} class="site-link inline-block relative px-5 py-3">
               <span class="relative font-bold">{linkText}</span>
             </a>
@@ -66,12 +66,10 @@ const boxBorderColor = backgroundBoxColor || '#f7f7f9';
 
 <style lang="scss" define:vars={{ boxBorderColor }}>
   .display-card {
+    .background-box,
+    .site-link-container,
     h3,
     p {
-      opacity: 0;
-    }
-
-    .background-box {
       opacity: 0;
     }
 
@@ -86,13 +84,18 @@ const boxBorderColor = backgroundBoxColor || '#f7f7f9';
       }
 
       h3,
-      p {
+      p,
+      .site-link-container {
         animation: TextRise 500ms cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
         animation-delay: 250ms;
       }
 
       p {
         animation-delay: 500ms;
+      }
+
+      .site-link-container {
+        animation-delay: 750ms;
       }
 
       .image-container {

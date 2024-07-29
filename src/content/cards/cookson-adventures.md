@@ -1,6 +1,6 @@
 ---
 title: 'Cookson Adventures'
-text: 'Some Cookson Adventures content!'
+text: 'Website for an elegant adventure travel company that reflects their thirst for breathtaking natural beauty'
 type: 'work'
 sortOrder: 6
 link: '/portfolio/adventures-website'
