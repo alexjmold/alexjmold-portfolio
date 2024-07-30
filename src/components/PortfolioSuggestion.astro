@@ -14,7 +14,6 @@ const work = await getCollection(
 const currentIndex = work.findIndex(({ data }) => data.key === key);
 
 const nextIndex = currentIndex >= work.length - 1 ? 0 : currentIndex + 1;
-console.log(currentIndex, nextIndex);
 const next = work[nextIndex].data;
 
 const previousIndex = currentIndex === 0 ? work.length - 1 : currentIndex - 1;
