@@ -1,6 +1,7 @@
 ---
 title: 'About'
-text: 'I enjoy making beautiful looking interactive pieces for the web. Graduated from Goldsmiths (UOL) with First Class Honours in (BSc) Creative Computing and have been working in industry ever since on a wide variety of projects.'
+text: '
+I am passionate about creating visually stunning and interactive web experiences. With a First Class Honours degree in BSc Creative Computing from Goldsmiths, University of London, I bring over 8 years of industry experience to the table.'
 type: 'about'
 link: '#'
 linkText: 'See my CV'

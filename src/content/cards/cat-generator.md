@@ -1,6 +1,6 @@
 ---
 title: 'Cat Generator'
-text: 'SVG Generation for creating cat avatars'
+text: 'Generative and randomised SVG creation for cat avatars'
 type: 'play'
 sortOrder: 3
 link: 'https://dazzling-turing-d141d6.netlify.app/'
